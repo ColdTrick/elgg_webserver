@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Enable/configure PHP modules
 RUN docker-php-ext-install -j$(nproc) exif iconv json mysqli opcache pdo pdo_mysql xml zip \
-	&& docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
 	&& docker-php-ext-install -j$(nproc) gd
 
 # Install imagick
