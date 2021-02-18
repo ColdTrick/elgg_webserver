@@ -1,7 +1,5 @@
 @echo off
 
-SET logdir=%~dp0
-
 echo Starting build
 docker build -t coldtrick/elgg_webserver:latest --pull -q .
 
