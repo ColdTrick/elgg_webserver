@@ -37,7 +37,7 @@ RUN pecl update-channels \
 	&& docker-php-ext-enable imagick
 
 # Enable mods for Apache
-RUN a2enmod cache expires rewrite \
+RUN a2enmod cache expires rewrite headers \
 	&& service apache2 restart
 
 # Create dataroot directory
