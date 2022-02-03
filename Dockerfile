@@ -6,16 +6,17 @@ RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Install additional php modules
 RUN apt-get update && apt-get install -y --no-install-recommends \
+		git \
 		libfreetype6-dev \
 		libjpeg62-turbo-dev \
 		libmagickwand-dev \
 		libzip-dev \
+		locales-all \
 		sendmail \
-		git \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Enable/configure PHP modules
-RUN docker-php-ext-install -j$(nproc) exif iconv json mysqli opcache pdo pdo_mysql xml zip \
+RUN docker-php-ext-install -j$(nproc) exif iconv intl json mysqli opcache pdo pdo_mysql xml zip \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
 	&& docker-php-ext-install -j$(nproc) gd
 
