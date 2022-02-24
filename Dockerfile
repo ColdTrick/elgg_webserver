@@ -1,5 +1,5 @@
 # PHP container
-FROM php:7.4-apache
+FROM php:8.1-apache
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Enable/configure PHP modules
-RUN docker-php-ext-install -j$(nproc) exif iconv intl json mysqli opcache pdo pdo_mysql xml zip \
+RUN docker-php-ext-install -j$(nproc) exif iconv intl mysqli opcache pdo pdo_mysql xml zip \
 	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
 	&& docker-php-ext-install -j$(nproc) gd
 
