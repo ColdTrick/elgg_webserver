@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		libfreetype6-dev \
 		libjpeg62-turbo-dev \
 		libmagickwand-dev \
+		libwebp-dev \
 		libzip-dev \
 		locales-all \
 		sendmail \
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Enable/configure PHP modules
 RUN docker-php-ext-install -j$(nproc) exif iconv intl mysqli opcache pdo pdo_mysql xml zip \
-	&& docker-php-ext-configure gd --with-freetype --with-jpeg \
+	&& docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
 	&& docker-php-ext-install -j$(nproc) gd
 
 # Install ImageMagick 7.0 (not available in apt-get)
