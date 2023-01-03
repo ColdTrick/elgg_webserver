@@ -13,6 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 		libwebp-dev \
 		libzip-dev \
 		locales-all \
+        rsyslog \
 		sendmail \
 	&& rm -rf /var/lib/apt/lists/*
 
