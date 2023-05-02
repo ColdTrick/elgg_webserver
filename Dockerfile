@@ -39,8 +39,9 @@ RUN pecl update-channels \
 	&& echo "\n" | pecl install imagick \
 	&& docker-php-ext-enable imagick
 
-# Enable mods for Apache
-RUN a2enmod cache expires rewrite headers \
+# Disable / enable mods for Apache
+RUN a2dismod status \
+	&& a2enmod cache expires rewrite headers \
 	&& service apache2 restart
 
 # Create dataroot directory
@@ -55,5 +56,8 @@ RUN mkdir /var/www/cacheroot \
 RUN mkdir /var/www/assetroot \
 	&& chown -R www-data:www-data /var/www/assetroot
 
-# copy php ini adjustments
+# copy Apache config adjustments
+COPY files/apache/*.conf /etc/apache2/mods-available/
+
+# copy PHP ini adjustments
 COPY files/php/*.ini /usr/local/etc/php/conf.d/
