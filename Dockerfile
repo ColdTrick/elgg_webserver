@@ -1,5 +1,5 @@
 # PHP container
-FROM php:8.1-apache
+FROM php:8.2-apache
 
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
@@ -16,6 +16,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         rsyslog \
 		sendmail \
 	&& rm -rf /var/lib/apt/lists/*
+
+# copy rsyslog service script (Debian 12 is missing this)
+# @see https://github.com/rsyslog/rsyslog/issues/5324
+COPY files/rsyslog/rsyslog /etc/init.d/
+# make sure it's executable
+RUN chmod a+x /etc/init.d/rsyslog
 
 # Enable/configure PHP modules
 RUN docker-php-ext-install -j$(nproc) exif iconv intl mysqli opcache pdo pdo_mysql xml zip \
