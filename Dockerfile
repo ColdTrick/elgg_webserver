@@ -63,7 +63,8 @@ RUN mkdir /var/www/assetroot \
 	&& chown -R www-data:www-data /var/www/assetroot
 
 # copy Apache config adjustments
-COPY files/apache/*.conf /etc/apache2/mods-available/
+COPY files/apache/mods/*.conf /etc/apache2/mods-available/
+COPY files/apache/conf/*.conf /etc/apache2/conf-available/
 
 # copy PHP ini adjustments
 COPY files/php/*.ini /usr/local/etc/php/conf.d/
