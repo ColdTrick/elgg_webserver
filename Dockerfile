@@ -5,7 +5,7 @@ FROM php:8.3-apache
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Install additional php modules
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
 		git \
 		libfreetype6-dev \
 		libjpeg62-turbo-dev \
