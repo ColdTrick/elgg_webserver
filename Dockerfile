@@ -5,7 +5,9 @@ FROM php:8.3-apache
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
 # Install additional php modules
-RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recommends \
+RUN apt-get update \
+    && apt-get upgrade -y \
+    && apt-get install -y --no-install-recommends \
 		git \
 		libfreetype6-dev \
 		libjpeg62-turbo-dev \
@@ -15,6 +17,8 @@ RUN apt-get update && apt-get upgrade && apt-get install -y --no-install-recomme
 		locales-all \
         rsyslog \
 		sendmail \
+    && apt-get autoclean \
+    && apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/*
 
 # copy rsyslog service script (Debian 12 is missing this)
