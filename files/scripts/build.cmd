@@ -1,7 +1,7 @@
 @echo off
 
 echo Starting build
-docker build -t coldtrick/elgg_webserver:latest --pull -q .
+docker build -t coldtrick/elgg_webserver:latest --pull -q --no-cache .
 
 echo.
 echo Starting webserver
